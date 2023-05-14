@@ -41,14 +41,8 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
 
     public function send(string $number, string $message)
     {
-
-        $number = $this->filterNumber($number);
-
         $receptor = [$number];
-        $date     = null;
-        $type     = 1;
-        $localid  = null;
-        $result   = $this->_send($receptor, $this->sender, $message, $date, $type, $localid);
+        $result   = $this->_send($receptor, $message);
 
         if ($result) {
             $res = array_shift($result);
@@ -106,22 +100,15 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
 
     }
 
-    private function _send($receptor, $sender, $message, $date = null, $type = null, $localid = null)
+    private function _send($receptor, $message)
     {
         if (is_array($receptor)) {
             $receptor = implode(",", $receptor);
         }
-        if (is_array($localid)) {
-            $localid = implode(",", $localid);
-        }
         $path   = $this->get_path("send");
         $params = array(
             "receptor" => $receptor,
-            "sender"   => $sender,
             "message"  => $message,
-            "date"     => $date,
-            "type"     => $type,
-            "localid"  => $localid,
         );
 
         return $this->execute($path, $params);
