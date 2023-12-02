@@ -88,7 +88,7 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
         }
         $json_response = json_decode($response);
         if ($code != 200 && is_null($json_response)) {
-            throw new Exception("Request have errors", $code);
+            throw new Exception("Request have errors: $response", $code);
         } else {
             $json_return = $json_response->return;
             if ($json_return->status != 200) {
