@@ -110,6 +110,9 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
             "receptor" => $receptor,
             "message"  => $message,
         );
+        if ($this->sender) {
+            $params['sender'] = $this->sender;
+        }
 
         return $this->execute($path, $params);
     }
