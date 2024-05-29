@@ -6,7 +6,7 @@ Support multiple config for each provider
 
 1.Installing Via composer
 ```bash
-composer require tartan/laravel-iranian-sms
+composer require juniora/laravel-iranian-sms
 ```
 
 2.Add this to your app service providers :
