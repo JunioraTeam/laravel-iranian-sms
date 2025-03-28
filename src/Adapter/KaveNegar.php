@@ -39,10 +39,10 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
         }
     }
 
-    public function send(string $number, string $message)
+    public function send(string $number, string $message, array $params = [])
     {
         $receptor = [$number];
-        $result   = $this->_send($receptor, $message);
+        $result   = $this->_send($receptor, $message, $params);
 
         if ($result) {
             $res = array_shift($result);
@@ -100,7 +100,7 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
 
     }
 
-    private function _send($receptor, $message)
+    private function _send($receptor, $message, array $params = [])
     {
         if (is_array($receptor)) {
             $receptor = implode(",", $receptor);
@@ -109,6 +109,7 @@ class KaveNegar extends AdapterAbstract implements AdapterInterface
         $params = array(
             "receptor" => $receptor,
             "message"  => $message,
+            ...$params,
         );
         if ($this->sender) {
             $params['sender'] = $this->sender;
